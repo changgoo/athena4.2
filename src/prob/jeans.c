@@ -82,17 +82,17 @@ void problem(DomainS *pDomain)
   b0 = 0.0;
 #endif
 
-#ifdef SELF_GRAVITY
-/* Set gravity constant*/
-  four_pi_G = (4.0*Gamma*p0)*(PI*PI*njeans*njeans)/(d0*d0*lambda*lambda);
-  grav_mean_rho = d0;
-#endif /* SELF_GRAVITY */
 /* define useful parameters */
 #ifndef ISOTHERMAL
   cs=sqrt(Gamma*p0/d0);
 #else
     cs=Iso_csound;
 #endif
+#ifdef SELF_GRAVITY
+/* Set gravity constant*/
+  four_pi_G = (4.0*cs*cs)*(PI*PI*njeans*njeans)/(d0*lambda*lambda);
+  grav_mean_rho = d0;
+#endif /* SELF_GRAVITY */
     kwave=2.0*PI/lambda;
 /* dispersion relation */
     omega2=kwave*kwave*(cs*cs + va*va - four_pi_G*d0/(kwave*kwave));
